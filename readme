@@ -1,0 +1,40 @@
+setup steps
+---
+npm install -g @nestjs/cli
+nest new prjktname (full setup, src->cntrl,module,service,main)
+nest generate module modname (new module)
+nest generate controller name (controller for module name)
+nest generate service name (service for module name)
+
+fix 'common' dependancy problem
+npm install @nestjs/common
+npm install @nestjs/core
+---
+
+logic
+---
+Controller 'responds' to URL or other request, then dicatates which 'service'-function is called. 
+In Service, actual functionality is written. these things together make up a module and are 
+appropriately inserted into the project, with help of 'nest generate' commands. Any variables
+can be extracted from the URL string part itself using @Param decorator, 
+or structs can be 'added' to the request as a 'body', which can be parsed with @body decorator
+---
+
+testing server
+---
+As is, server starts with 'npm start' and books can be found on localhost:3000/books 
+(getAllBooks() is called on this URL).
+
+Manually with curl books can be added, updated etc
+add a book (with body):
+curl -X POST http://localhost:3000/books \
+-H "Content-Type: application/json" \
+-d '{"id":1, "title": "bookTitle", "author": "writers", "year": 9000}'
+
+
+update book with ID 1:
+curl -X PUT http://localhost:3000/books/1 \
+-H "Content-Type: application/json" \
+-d '{"title": "The Great Gatsby - Updated", "author": "F. Scott Fitzgerald", "year": 1925}'
+
+---
